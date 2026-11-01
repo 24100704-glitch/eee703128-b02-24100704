@@ -1,3 +1,4 @@
+
 import cocotb
 from cocotb.triggers import Timer
 
@@ -29,14 +30,21 @@ async def test_priority_encoder(dut):
         expected = (expected_valid << 3) | expected_idx
 
         actual = int(dut.uo_out.value)
+        uio_actual = int(dut.uio_out.value)
+        oe_actual = int(dut.uio_oe.value)
 
-        if actual == expected:
+        if (actual == expected
+                and uio_actual == 0
+                and oe_actual == 0):
             pass_count += 1
         else:
             fail_count += 1
             dut._log.error(
                 f"FAIL: input={i:08b}, "
-                f"expected={expected:04b}, actual={actual:08b}"
+                f"expected={expected:04b}, "
+                f"actual={actual:08b}, "
+                f"uio_out={uio_actual:08b}, "
+                f"uio_oe={oe_actual:08b}"
             )
 
     dut._log.info(f"TOTAL: {pass_count + fail_count}")
