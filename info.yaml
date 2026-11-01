@@ -2,7 +2,23 @@ project:
   title: "B02 - 8-to-3 Priority Encoder"
   author: "Vu Anh Tu"
   discord: ""
-  description: "An 8-to-3 priority encoder with a valid output flag."
+  how_it_works: |
+    The circuit receives 8 input signals.
+    Input ui_in[7] has the highest priority,
+    while ui_in[0] has the lowest priority.
+    When multiple inputs are active, the output
+    represents the highest-priority active input.
+    The valid flag is 1 when at least one input
+    is active, otherwise it is 0.
+
+  how_to_test: |
+    Apply all 256 possible input combinations
+    to ui_in[7:0].
+    Check that uo_out[2:0] represents the index
+    of the highest-priority active input.
+    Check that uo_out[3] indicates whether
+    any input is active.
+    Check that uo_out[7:4] are always zero.
   language: "Verilog"
   clock_hz: 0
 
