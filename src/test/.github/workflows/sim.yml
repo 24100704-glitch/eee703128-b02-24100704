@@ -1,0 +1,30 @@
+name: B02 Verilog Simulation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  simulation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Icarus Verilog
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y iverilog
+
+      - name: Compile Verilog
+        run: |
+          iverilog -g2012 -o sim.out \
+            src/tt_um_eee703128_24100704.v \
+            test/tb_priority_encoder.v
+
+      - name: Run simulation
+        run: vvp sim.out
