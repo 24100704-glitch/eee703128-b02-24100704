@@ -1,6 +1,7 @@
 project:
   title: "B02 - 8-to-3 Priority Encoder"
   author: "Vu Anh Tu"
+  description: "An 8-to-3 priority encoder with a valid output flag."
   discord: ""
   how_it_works: |
     The circuit receives 8 input signals.
